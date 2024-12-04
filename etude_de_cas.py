@@ -4,6 +4,7 @@ from numpy import array, identity, transpose, matmul, std, mean
 from numpy.linalg import eig
 
 from clustering_kmeans import kmeans
+from clustering_hierarchique import genDistanceMatrix, getDendrogram
 
 
 def parseCSV(csv_file='Country-data.csv'):
@@ -19,8 +20,8 @@ def parseCSV(csv_file='Country-data.csv'):
 
 
 countries, data_country = parseCSV()
-print(countries)
-print(data_country)
+#print(countries)
+#print(data_country)
 
 X = array(data_country).reshape(-1, 9)
 n = len(countries)
@@ -31,7 +32,7 @@ R = matmul(matmul(transpose(Z), 1. / n * identity(n)), Z)
 eigenvectors = eig(R)[1]
 components = [matmul(Z, eigenvectors[:, 0]), matmul(Z, eigenvectors[:, 1])]
 data_reduced = [[round(float(components[0][i]), 2), round(float(components[1][i]), 2)] for i in range(n)]
-print(data_reduced)
+#print(data_reduced)
 
 k_2 = 2
 initial_centroids_2 = [[-100, 0], [100, 0]]
@@ -42,6 +43,8 @@ savePath = 'caseStudies_graphs/'
 scale = 0.00000000000000001
 
 if __name__ == '__main__':
+
+    '''
     kmeans(data_reduced,  # Liste des points
            k_2,  # Nombre de clusters   # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
            point_names=point_names_2,
@@ -60,3 +63,7 @@ if __name__ == '__main__':
            savePath=savePath,
            filename=fileDataName2,
            scale=scale)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
+    '''
+
+    countries_distance_matrice = genDistanceMatrix(data_reduced)
+    getDendrogram("Countries", countries, dist_matrice=countries_distance_matrice, savePath=savePath, method="single")

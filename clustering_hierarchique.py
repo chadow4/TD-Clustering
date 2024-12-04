@@ -1,17 +1,33 @@
 from scipy.cluster.hierarchy import dendrogram, linkage
 import numpy as np
 import matplotlib.pyplot as plt
+from clustering_kmeans import getDistance
 
+def genDistanceMatrix(points) :
+    dist_matrice = []
+    # Créer une matrice avec les distances réelles (euclidiennes)
+    for i in range(len(points)) :
+        for j in range(i) :
+            dist_matrice.append(getDistance(points[i], points[j]))
+
+    # Normaliser la matrice pour avoir des valeurs entre 0 et 1
+    distMin, distMax = min(dist_matrice), max(dist_matrice)
+    for i in range(len(dist_matrice)) :
+        dist_matrice[i] = (dist_matrice[i] - distMin) / (distMax - distMin)
+    
+    return dist_matrice
 
 def genDendrogram(name, labels, linkage_matrice, savePath, method) :
-    plt.figure(figsize=(25, 10))
+    plt.figure(figsize=(50, 20))
     dendrogram(
         linkage_matrice,
-        leaf_font_size=40.,
+        orientation='right',
+        leaf_font_size=8.,
         labels=labels,
     )
     plt.title(f"Clustering hiérarchique - {name} - {method} link")
-    plt.savefig(savePath + f"{name}_{method}.png")
+    plt.savefig(savePath + f"{name}_{method}.pdf")
+    plt.close()
 
 def transformMatriceSimilToDistance(simil_matrice) :
     for i in range(len(simil_matrice)) :
@@ -52,3 +68,4 @@ if __name__ == '__main__':
 
     getDendrogram(name2, labels=labels, simil_matrice=simil_matrice, method='single', savePath=savePath)
     getDendrogram(name2, labels=labels, simil_matrice=simil_matrice, method='complete', savePath=savePath)
+    
