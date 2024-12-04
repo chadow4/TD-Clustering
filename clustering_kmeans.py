@@ -176,11 +176,12 @@ if __name__ == '__main__':
     kmeans(data_1,  k_1,  centroids=initial_centroids_1B)
 
     # Exécution de K-Means pour le jeu de données en deux dimensions.
-    fileDataName = "data_2"
     savePath = 'kmeans_graphs/'
     data_2 = [[-2, 3], [-2, 1], [-2, -1], [2, -1], [2, 1], [1, 0]]
-    initial_centroids_2 = [[-2, 3], [-2, 1]]
+    initial_centroids_2A = [[-2, 3], [-2, 1]]
+    initial_centroids_2B = [[2, -1], [1, 0]]
     point_names_2 = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6']
     k_2 = 3
 
-    kmeans(data_2, k_2, centroids=initial_centroids_2, point_names=point_names_2, saveFigs=True, savePath=savePath, filename=fileDataName)
+    kmeans(data_2, k_2, centroids=initial_centroids_2A, point_names=point_names_2, saveFigs=True, savePath=savePath, filename="2A")
+    kmeans(data_2, k_2, centroids=initial_centroids_2B, point_names=point_names_2, saveFigs=True, savePath=savePath, filename='2B')
