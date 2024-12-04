@@ -36,7 +36,7 @@ def getDendrogram(name, dist_matrice=[], simil_matrice=[], savePath='', method='
 
 if __name__ == '__main__':
 
-    savePath = "2_graphs/"
+    savePath = "hierarchic_graphs/"
 
     # Avec Matrice de distance
     name1 = "Ex.1"
