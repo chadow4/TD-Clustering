@@ -1,9 +1,8 @@
-from scipy.cluster.hierarchy import dendrogram, linkage
-import numpy as np
 import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import dendrogram, linkage
 
 
-def genDendrogram(name, linkage_matrice, savePath, method) :
+def genDendrogram(name, linkage_matrice, savePath, method):
     plt.figure(figsize=(25, 10))
     dendrogram(
         linkage_matrice,
@@ -13,19 +12,21 @@ def genDendrogram(name, linkage_matrice, savePath, method) :
     plt.title("Clustering hiérarchique")
     plt.savefig(savePath + f"{name}_{method}.png")
 
-def transformMatriceSimilToDistance(simil_matrice) :
-    for i in range(len(simil_matrice)) :
-        simil_matrice[i] = 1-simil_matrice[i]
+
+def transformMatriceSimilToDistance(simil_matrice):
+    for i in range(len(simil_matrice)):
+        simil_matrice[i] = 1 - simil_matrice[i]
     return simil_matrice
 
-def getDendrogram(name, dist_matrice=[], simil_matrice=[], savePath='', method='single') :
-    if len(dist_matrice)<1 and len(simil_matrice)<1 :
+
+def getDendrogram(name, dist_matrice=[], simil_matrice=[], savePath='', method='single'):
+    if len(dist_matrice) < 1 and len(simil_matrice) < 1:
         print("Renseignez une matrice de distance ou une matrice de similarité")
         return
-    if len(dist_matrice)>0 and len(simil_matrice)>0 :
+    if len(dist_matrice) > 0 and len(simil_matrice) > 0:
         print("Renseignez une seule des deux matrices")
         return
-    if len(simil_matrice)>0 :
+    if len(simil_matrice) > 0:
         dist_matrice = transformMatriceSimilToDistance(simil_matrice)
 
     linkage_matrice = linkage(dist_matrice, method=method)
@@ -33,9 +34,7 @@ def getDendrogram(name, dist_matrice=[], simil_matrice=[], savePath='', method='
     print("Dendrograme '" + name + "_" + method + "' généré et sauvegardé")
 
 
-
 if __name__ == '__main__':
-
     savePath = "hierarchic_graphs/"
 
     # Avec Matrice de distance
