@@ -1,8 +1,6 @@
 import random
 from math import sqrt
-
 import matplotlib.pyplot as plt
-
 
 def getDistance(p1, p2):
     # Retourne la distance euclidienne entre deux points de même dimension.
@@ -52,7 +50,6 @@ def getSSE(centroids, centrDict):
 def getNameDict(points, point_names):
     # Crée et retourne un dictionnaire pour associer les coordonnées des noeuds avec les noms des noeuds
     nameDict = {}
-    print(points)
     if len(point_names) > 0:
         for i in range(len(point_names)):
             nameDict[point_names[i]] = points[i]
@@ -99,21 +96,21 @@ def gen2dGraph(centroids, centrDict, nameDict, iteration, savePath, filename, sc
     plt.close(fig)
 
 
-def kmeans(points, nbclusters, centroids=[], point_names=[], saveFigs=True, savePath='', filename='', iterMax=20,
-           scale=1):
+def kmeans(points, nbclusters, centroids=[], point_names=[], saveFigs=True, savePath='', filename='', iterMax=20, scale=1, logIter=True):
     """
        Exécute l'algorithme K-means sur un ensemble de points.
 
-       Préconditions :
-       - `points` doit être une liste de listes contenant les coordonnées des points.
-       - `nbclusters` doit être un entier représentant le nombre de clusters.
-       - `centroids` doit être une liste de listes contenant les coordonnées des centroïdes initiaux (optionnel).
-       - `point_names` doit être une liste de noms de points correspondant aux données (optionnel).
-       - `saveFigs` doit être un booléen indiquant si les figures doivent être sauvegardées.
-       - `savePath` doit être une chaîne de caractères représentant le chemin de sauvegarde.
-       - `filename` doit être une chaîne de caractères représentant le nom du fichier de sauvegarde.
-       - `iterMax` doit être un entier représentant le nombre maximum d'itérations.
-       - `scale` doit être un nombre flottant représentant l'échelle.
+       Paramètres :
+       - points : Liste des coordonnées des points.
+       - nbclusters : Entier représentant le nombre de clusters.
+       - centroids: Listes contenant les coordonnées des centroïdes initiaux (optionnel : par défaut, ils sont tirés au hasard).
+       - point_names : Liste de noms de points (optionnel : par défaut, ils ne seront pas nommés).
+       - saveFigs : Booléen indiquant si les figures doivent être sauvegardées (optionnel : par défaut, elles ne seront pas sauvegardées).
+       - savePath : Chaîne de caractères représentant le chemin de sauvegarde des graphiques (optionnel : par défaut, ils seront sauvegardés dans le répertoire courant).
+       - filename : Chaîne de caractères représentant le nom du fichier de sauvegarde (optionnel : par défaut, ils seront juste nommés avec le numéro d'itération).
+       - iterMax : Entier représentant le nombre maximum d'itérations (optionnel : 20 par défaut).
+       - scale : Nombre flottant représentant l'échelle du graphique (optionnel : 1 par défaut).
+       - logIter : Booléen indiquant si on veut afficher sur la console le rapport des itérations (optionnel : True par défaut)
 
        Postconditions :
        - Exécute l'algorithme K-means sur les données et sauvegarde les figures si `saveFigs` est `True`.
@@ -132,7 +129,7 @@ def kmeans(points, nbclusters, centroids=[], point_names=[], saveFigs=True, save
     # Boucle principale.
     print("Début de l'algorithme K-Means...")
     for _ in range(iterMax):
-        print('Iteration ' + str(iteration))
+        if logIter : print('Iteration ' + str(iteration))
         # On initialise un dictionnaire {str(centroïde) : List[Points]}.
         centrDict = {}
         # Pour chaque point, on détermine son plus proche centroïde et on l'ajoute dans le dictionnaire à la clé correspondante.
@@ -147,14 +144,13 @@ def kmeans(points, nbclusters, centroids=[], point_names=[], saveFigs=True, save
         newCentroids = []
         # Pour chaque cluster, on appelle une méthode qui détermine son nouveau centroïde.
         for centroid in centrDict.keys():
-            print('Centroid : ' + str(centroid) + '   Points : ' + str(centrDict[str(centroid)]))
+            if logIter : print('Centroid : ' + str(centroid) + '   Points : ' + str(centrDict[str(centroid)]))
             newCentroids.append(determineNewCentroid(centrDict[str(centroid)]))
 
             # On sauvegarde le graphique des clusters pour l'itération courante dans le dossier spécifié.
         if saveFigs and len(points[0]) == 2:
             gen2dGraph(centroids, centrDict, nameDict, iteration, savePath, filename, scale)
-            print(
-                "Graphiques des clusters pour l'itération " + str(iteration) + " sauvegardé (path : " + savePath + ")")
+            print("Graphiques des clusters pour l'itération " + str(iteration) + " sauvegardé (path : " + savePath + ")")
 
         # Si convergence atteinte, on sort de la fonction en affichant le SSE.
         if centroids == newCentroids:
@@ -170,6 +166,7 @@ def kmeans(points, nbclusters, centroids=[], point_names=[], saveFigs=True, save
 
 if __name__ == '__main__':
 
+    # Exécution de K-Means pour le jeu de données en une dimension.
     data_1 = [[2], [4], [6], [12], [24], [30]]
     initial_centroids_1A = [[2], [6]]
     initial_centroids_1B = [[12], [24]]
@@ -178,7 +175,7 @@ if __name__ == '__main__':
     kmeans(data_1,  k_1,  centroids=initial_centroids_1A)
     kmeans(data_1,  k_1,  centroids=initial_centroids_1B)
 
-
+    # Exécution de K-Means pour le jeu de données en deux dimensions.
     fileDataName = "data_2"
     savePath = 'kmeans_graphs/'
     data_2 = [[-2, 3], [-2, 1], [-2, -1], [2, -1], [2, 1], [1, 0]]
@@ -186,10 +183,4 @@ if __name__ == '__main__':
     point_names_2 = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6']
     k_2 = 3
 
-    kmeans(data_2,
-           k_2,
-           centroids=initial_centroids_2,
-           point_names=point_names_2,
-           saveFigs=True,  #
-           savePath=savePath,
-           filename=fileDataName)
+    kmeans(data_2, k_2, centroids=initial_centroids_2, point_names=point_names_2, saveFigs=True, savePath=savePath, filename=fileDataName)
