@@ -41,6 +41,7 @@ M5 : [2, 1]
 M6 : [1, 0]
 
 L'appel a la fonction kmeans avec les parametres savefigs=True et savePath= 'kmeans_graphs/' permet de sauvegarder les graphiques dans un fichier pdf dans le dossier kmeans_graphs.
+La fonction main permet de lancer l'algorithme sur les deux jeux de données.
 ### a)
 
 #### Avec les centroides initiaux M1 et M2 :
@@ -73,7 +74,7 @@ L'affichage est tel qu'il regroupe les élément (points du tableau initial en c
 
 Le fichier clustering_hierarchique.py contient le code de l'algorithme de clustering hierarchique.
 L'appel a la fonction getDentrogram permet de sauvegarder avec le parametre savePath= 'hierarchic_graphs/' les graphiques dans un fichier pdf dans le dossier hierarchic_graphs.
-
+La fonction main permet de lancer l'algorithme sur les deux jeux de données
 ### a) 
 Nous avons utilisé le jeu de données fourni dans l'énnoncé: [0.1, 0.9, 0.35, 0.8, 0.3, 0.4, 0.5, 0.6, 0.7, 0.2]
 
@@ -100,6 +101,7 @@ Nous obtenons bien le même graphique que dans l'énnoncé ce qui signifie que n
 
 ## Etude de cas 
 
+La fonction main du fichier etude_de_cas.py permet de lancer les deux algorithmes (kmeans et clustering hierarchique) sur les données des pays.
 ## 1)
 
 Le fichier etude_de_cas.py contient le code de l'étude de cas.
@@ -110,10 +112,8 @@ Tout d'abord afin d'exploiter les données qui nous était fourni dans le fichie
 une fois que nous avons ces donneées , nous avons utilisé le code fourni afin d'avoir notre tableau data_reduced qui est utilisable par nos algorithmes de clustering.
 
 ## 2)
-
 ### a) Kmeans
 Nous appelons la fonction kmeans que nous avons initialement implémenté dans la partie 1 avec les données réduites des pays contenus dans data_reduced.
-
 Les centroides sont choisies aléatoirement.
 
 #### 1) deux centroides initiaux k=2
