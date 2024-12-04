@@ -3,17 +3,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 from clustering_kmeans import getDistance
 
-def genDistanceMatrix(points) :
+def genDistanceMatrix(points, normalize=False) :
     dist_matrice = []
     # Créer une matrice avec les distances réelles (euclidiennes)
     for i in range(len(points)) :
-        for j in range(i) :
+        for j in range(i+1, len(points)) :
             dist_matrice.append(getDistance(points[i], points[j]))
 
     # Normaliser la matrice pour avoir des valeurs entre 0 et 1
-    distMin, distMax = min(dist_matrice), max(dist_matrice)
-    for i in range(len(dist_matrice)) :
-        dist_matrice[i] = (dist_matrice[i] - distMin) / (distMax - distMin)
+    if normalize :
+        distMin, distMax = min(dist_matrice), max(dist_matrice)
+        for i in range(len(dist_matrice)) :
+            dist_matrice[i] = (dist_matrice[i] - distMin) / (distMax - distMin)
     
     return dist_matrice
 
