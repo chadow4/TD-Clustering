@@ -18,11 +18,11 @@ def genDistanceMatrix(points, normalize=False) :
     
     return dist_matrice
 
-def genDendrogram(name, labels, linkage_matrice, savePath, method) :
+def genDendrogram(name, labels, linkage_matrice, savePath, method,orientation) :
     plt.figure(figsize=(50, 20))
     dendrogram(
         linkage_matrice,
-        orientation='right',
+        orientation=orientation,
         leaf_font_size=8.,
         labels=labels,
     )
@@ -35,7 +35,7 @@ def transformMatriceSimilToDistance(simil_matrice) :
         simil_matrice[i] = 1-simil_matrice[i]
     return simil_matrice
 
-def getDendrogram(name, labels=None, dist_matrice=[], simil_matrice=[], savePath='', method='single') :
+def getDendrogram(name, labels=None, dist_matrice=[], simil_matrice=[], savePath='', method='single',orientation="top") :
     if len(dist_matrice)<1 and len(simil_matrice)<1 :
         print("Renseignez une matrice de distance ou une matrice de similarité")
         return
@@ -46,7 +46,7 @@ def getDendrogram(name, labels=None, dist_matrice=[], simil_matrice=[], savePath
         dist_matrice = transformMatriceSimilToDistance(simil_matrice)
 
     linkage_matrice = linkage(dist_matrice, method=method)
-    genDendrogram(name, labels, linkage_matrice, savePath, method)
+    genDendrogram(name, labels, linkage_matrice, savePath, method,orientation)
     print("Dendrograme '" + name + "_" + method + "' généré et sauvegardé")
 
 

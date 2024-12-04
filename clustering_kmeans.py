@@ -75,7 +75,6 @@ def gen2dGraph(centroids, centrDict, nameDict, iteration, savePath, filename, sc
 
     fig, ax = plt.subplots(figsize=(5, 5) if scale == 1 else (15, 15))
 
-
     for centroid in centroids:
         for point in centrDict[str(centroid)]:
             px.append(point[0])
@@ -102,6 +101,24 @@ def gen2dGraph(centroids, centrDict, nameDict, iteration, savePath, filename, sc
 
 def kmeans(points, nbclusters, centroids=[], point_names=[], saveFigs=True, savePath='', filename='', iterMax=20,
            scale=1):
+    """
+       Exécute l'algorithme K-means sur un ensemble de points.
+
+       Préconditions :
+       - `points` doit être une liste de listes contenant les coordonnées des points.
+       - `nbclusters` doit être un entier représentant le nombre de clusters.
+       - `centroids` doit être une liste de listes contenant les coordonnées des centroïdes initiaux (optionnel).
+       - `point_names` doit être une liste de noms de points correspondant aux données (optionnel).
+       - `saveFigs` doit être un booléen indiquant si les figures doivent être sauvegardées.
+       - `savePath` doit être une chaîne de caractères représentant le chemin de sauvegarde.
+       - `filename` doit être une chaîne de caractères représentant le nom du fichier de sauvegarde.
+       - `iterMax` doit être un entier représentant le nombre maximum d'itérations.
+       - `scale` doit être un nombre flottant représentant l'échelle.
+
+       Postconditions :
+       - Exécute l'algorithme K-means sur les données et sauvegarde les figures si `saveFigs` est `True`.
+       - Affiche la Sum of Squared Error (SSE) à la fin de l'exécution.
+       """
     # On définit le nombre d'itérations maximum.
     iteration, iterMax = 1, iterMax
 
@@ -151,33 +168,28 @@ def kmeans(points, nbclusters, centroids=[], point_names=[], saveFigs=True, save
     print("Nombre maximum d'itérations (" + iterMax + ") atteint.\nSSE : " + str(getSSE(centroids, centrDict)))
 
 
-data_1 = [[1], [2], [18], [20], [31]]
-initial_centroids_1 = [[18], [20], [31]]
-point_names_1 = ['M1', 'M2', 'M3', 'M4', 'M5']
-k_1 = 3
-
-data_2 = [[-2, 3], [-2, 1], [-2, -1], [2, -1], [2, 1], [1, 0]]
-initial_centroids_2 = [[-2, 3], [-2, 1]]
-point_names_2 = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6']
-k_2 = 3
-fileDataName = "data_2"
-savePath = 'kmeans_graphs/'
-
 if __name__ == '__main__':
-    kmeans(data_1,  # Liste des points
-           k_2,  # Nombre de clusters
-           centroids=initial_centroids_1,  # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
-           point_names=point_names_1,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
+
+    data_1 = [[2], [4], [6], [12], [24], [30]]
+    initial_centroids_1A = [[2], [6]]
+    initial_centroids_1B = [[12], [24]]
+    k_1 = 2
+
+    kmeans(data_1,  k_1,  centroids=initial_centroids_1A)
+    kmeans(data_1,  k_1,  centroids=initial_centroids_1B)
+
+
+    fileDataName = "data_2"
+    savePath = 'kmeans_graphs/'
+    data_2 = [[-2, 3], [-2, 1], [-2, -1], [2, -1], [2, 1], [1, 0]]
+    initial_centroids_2 = [[-2, 3], [-2, 1]]
+    point_names_2 = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6']
+    k_2 = 3
+
+    kmeans(data_2,
+           k_2,
+           centroids=initial_centroids_2,
+           point_names=point_names_2,
+           saveFigs=True,  #
            savePath=savePath,
            filename=fileDataName)
-# Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
-
-
-    kmeans(data_2,  # Liste des points
-           k_2,  # Nombre de clusters
-           centroids=initial_centroids_2,  # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
-           point_names=point_names_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
-           savePath=savePath,
-           filename=fileDataName)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)

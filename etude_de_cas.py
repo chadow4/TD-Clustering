@@ -35,7 +35,6 @@ data_reduced = [[round(float(components[0][i]), 2), round(float(components[1][i]
 #print(data_reduced)
 
 k_2 = 2
-initial_centroids_2 = [[-100, 0], [100, 0]]
 point_names_2 = countries
 fileDataName = "data_country"
 fileDataName2 = "data_country2"
@@ -44,26 +43,26 @@ scale = 0.00000000000000001
 
 if __name__ == '__main__':
 
-    '''
-    kmeans(data_reduced,  # Liste des points
-           k_2,  # Nombre de clusters   # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
+
+    kmeans(data_reduced,
+           k_2,
            point_names=point_names_2,
-           centroids=initial_centroids_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
+           saveFigs=True,
            savePath=savePath,
            filename=fileDataName,
-           scale=scale)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
+           scale=scale)
 
-    kmeans(data_reduced,  # Liste des points
+    kmeans(data_reduced,
            3,
-           centroids=initial_centroids_2,
-           # Nombre de clusters   # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
-           point_names=point_names_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
+
+           point_names=point_names_2,
+           saveFigs=True,
            savePath=savePath,
            filename=fileDataName2,
-           scale=scale)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
-    '''
+           scale=scale)
+
 
     countries_distance_matrice = genDistanceMatrix(data_reduced)
-    getDendrogram("Countries", countries, dist_matrice=countries_distance_matrice, savePath=savePath, method="single")
+    getDendrogram("Countries", countries, dist_matrice=countries_distance_matrice, savePath=savePath, method="single",orientation="right")
+
+    getDendrogram("Countries", countries, dist_matrice=countries_distance_matrice, savePath=savePath, method="complete",orientation="right")
