@@ -72,10 +72,9 @@ def gen2dGraph(centroids, centrDict, nameDict, iteration, savePath, filename, sc
     availableColors = ['blue', 'red', 'green', 'yellow', 'orange', 'purple', 'black', 'brown', 'grey']
     colorIdx = 0
     cx, cy, px, py, pcol, ccol = [], [], [], [], [], []
-    if scale == 1:
-        fig, ax = plt.subplots(figsize=(5, 5))
-    else:
-        fig, ax = plt.subplots(figsize=(15, 15))
+
+    fig, ax = plt.subplots(figsize=(5, 5) if scale == 1 else (15, 15))
+
 
     for centroid in centroids:
         for point in centrDict[str(centroid)]:
@@ -97,7 +96,7 @@ def gen2dGraph(centroids, centrDict, nameDict, iteration, savePath, filename, sc
 
     plt.grid(True)
     plt.title("K-Means, Iteration " + str(iteration))
-    fig.savefig(savePath + f"Iteration_{filename}-{iteration}.png")
+    fig.savefig(savePath + f"Iteration_{filename}-{iteration}.pdf")
     plt.close(fig)
 
 
