@@ -41,21 +41,22 @@ fileDataName2 = "data_country2"
 savePath = 'caseStudies_graphs/'
 scale = 0.00000000000000001
 
-kmeans(data_reduced,  # Liste des points
-       k_2,  # Nombre de clusters   # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
-       point_names=point_names_2,
-       centroids=initial_centroids_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-       saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
-       savePath=savePath,
-       filename=fileDataName,
-       scale=scale)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
+if __name__ == '__main__':
+    kmeans(data_reduced,  # Liste des points
+           k_2,  # Nombre de clusters   # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
+           point_names=point_names_2,
+           centroids=initial_centroids_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
+           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
+           savePath=savePath,
+           filename=fileDataName,
+           scale=scale)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
 
-kmeans(data_reduced,  # Liste des points
-       3,
-       centroids=initial_centroids_2,
-       # Nombre de clusters   # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
-       point_names=point_names_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-       saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
-       savePath=savePath,
-       filename=fileDataName2,
-       scale=scale)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
+    kmeans(data_reduced,  # Liste des points
+           3,
+           centroids=initial_centroids_2,
+           # Nombre de clusters   # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
+           point_names=point_names_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
+           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
+           savePath=savePath,
+           filename=fileDataName2,
+           scale=scale)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)

@@ -164,20 +164,21 @@ k_2 = 3
 fileDataName = "data_2"
 savePath = 'kmeans_graphs/'
 
-kmeans(data_1,  # Liste des points
-       k_2,  # Nombre de clusters
-       centroids=initial_centroids_1,  # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
-       point_names=point_names_1,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-       saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
-       savePath=savePath,
-       filename=fileDataName)
+if __name__ == '__main__':
+    kmeans(data_1,  # Liste des points
+           k_2,  # Nombre de clusters
+           centroids=initial_centroids_1,  # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
+           point_names=point_names_1,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
+           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
+           savePath=savePath,
+           filename=fileDataName)
 # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
 
 
-kmeans(data_2,  # Liste des points
-       k_2,  # Nombre de clusters
-       centroids=initial_centroids_2,  # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
-       point_names=point_names_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
-       saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
-       savePath=savePath,
-       filename=fileDataName)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
+    kmeans(data_2,  # Liste des points
+           k_2,  # Nombre de clusters
+           centroids=initial_centroids_2,  # Centroïdes initiaux (Optionel. Par défaut, ils seront tirés au hasard.)
+           point_names=point_names_2,  # Nom des points (Optionel. Par défaut, les points ne seront pas nommés.)
+           saveFigs=True,  # Sauvegarder les figures (Optionel. Par défaut, les figures ne seront pas sauvegardées.)
+           savePath=savePath,
+           filename=fileDataName)  # Répertoire RELATIF pour sauvegarder les graphiques (Optionel. Par défaut, les figures seront sauvegardées sur le même répertoire.)
